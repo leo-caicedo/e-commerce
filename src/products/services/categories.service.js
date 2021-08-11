@@ -47,6 +47,17 @@ class CategoryServices {
       next(err);
     }
   }
+
+  async deleteCategory(req, res, next) {
+    const { id } = req.params;
+
+    try {
+      await Category.findByIdAndDelete(id);
+      res.status(204).end();
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 module.exports = CategoryServices;
