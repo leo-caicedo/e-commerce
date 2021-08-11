@@ -3,6 +3,9 @@ const express = require("express");
 // required routes
 const categoriesRoutes = require("./products/routes/categories.routes");
 
+// error handler
+const notFoundHandler = require("./utils/middleware/404Handler");
+
 const createApp = () => {
   const app = express();
 
@@ -11,6 +14,9 @@ const createApp = () => {
 
   // routes
   app.use("/api/categories", categoriesRoutes);
+
+  // 404
+  app.use(notFoundHandler);
 
   return app;
 };
