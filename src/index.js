@@ -1,4 +1,5 @@
 const createApp = require("./app");
+require("./db");
 
 const { config } = require("./config");
 const app = createApp();
