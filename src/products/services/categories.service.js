@@ -33,6 +33,20 @@ class CategoryServices {
       next(err);
     }
   }
+
+  async updateCategory(req, res, next) {
+    const { id } = req.params;
+    const { body: data } = req;
+
+    try {
+      const categoryUpdated = await Category.findByIdAndUpdate(id, data, {
+        new: true,
+      });
+      res.json(categoryUpdated);
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 module.exports = CategoryServices;
