@@ -3,6 +3,7 @@ const express = require("express");
 // required routes
 const categoriesRoutes = require("./products/routes/categories.routes");
 const brandsRoutes = require("./products/routes/brands.routes");
+const productsRoutes = require("./products/routes/products.routes");
 
 // error handler
 const notFoundHandler = require("./utils/middleware/404Handler");
@@ -21,6 +22,7 @@ const createApp = () => {
   // routes
   app.use("/api/categories", categoriesRoutes);
   app.use("/api/brands", brandsRoutes);
+  app.use("/api/products", productsRoutes);
 
   // 404
   app.use(notFoundHandler);
