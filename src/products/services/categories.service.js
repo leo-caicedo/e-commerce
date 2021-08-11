@@ -11,11 +11,11 @@ class CategoryServices {
     }
   }
 
-  async getCategory(res, res, next) {
+  async getCategory(req, res, next) {
     const { id } = req.params;
 
     try {
-      const category = Category.findById(id);
+      const category = await Category.findById(id);
       res.json(category);
     } catch (err) {
       next(err);
