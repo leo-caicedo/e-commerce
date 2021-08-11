@@ -21,6 +21,18 @@ class CategoryServices {
       next(err);
     }
   }
+
+  async createCategory(req, res, next) {
+    const { body: data } = req;
+
+    try {
+      const categoryCreated = new Category(data);
+      await categoryCreated.save();
+      res.status(201).json(categoryCreated);
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 module.exports = CategoryServices;
