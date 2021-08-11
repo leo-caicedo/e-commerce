@@ -1,12 +1,12 @@
 // models
 const Brand = require("../models/Brand");
 
-class BrandServices {
+class BrandsServices {
   async getBrands(req, res, next) {
     try {
       const brands = await Brand.find({});
       res.json(brands);
-    } catch {
+    } catch (err) {
       next(err);
     }
   }
@@ -17,7 +17,7 @@ class BrandServices {
     try {
       const brand = await Brand.findById(id);
       res.json(brand);
-    } catch {
+    } catch (err) {
       next(err);
     }
   }
@@ -39,7 +39,9 @@ class BrandServices {
     const { body: data } = req;
 
     try {
-      const brandUpdated = await Brand.findByIdAndUpdate(id, data);
+      const brandUpdated = await Brand.findByIdAndUpdate(id, data, {
+        new: true,
+      });
       res.json(brandUpdated);
     } catch (err) {
       next(err);
@@ -58,4 +60,4 @@ class BrandServices {
   }
 }
 
-module.exports = BrandServices;
+module.exports = BrandsServices;
