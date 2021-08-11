@@ -6,6 +6,11 @@ const brandsRoutes = require("./products/routes/brands.routes");
 
 // error handler
 const notFoundHandler = require("./utils/middleware/404Handler");
+const {
+  errorHandler,
+  logError,
+  wrapError,
+} = require("./utils/middleware/errorHandler");
 
 const createApp = () => {
   const app = express();
@@ -19,6 +24,11 @@ const createApp = () => {
 
   // 404
   app.use(notFoundHandler);
+
+  // error middleware
+  app.use(logError);
+  app.use(wrapError);
+  app.use(errorHandler);
 
   return app;
 };
