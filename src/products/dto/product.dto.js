@@ -1,6 +1,6 @@
 const { body } = require("express-validator");
 
-const productSchema = [
+const productDto = [
   // name
   body("product")
     .exists({ checkFalsy: true })
@@ -21,4 +21,4 @@ const productSchema = [
     .withMessage("Category is required"),
 ];
 
-module.exports = productSchema;
+module.exports = productDto;

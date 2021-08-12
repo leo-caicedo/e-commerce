@@ -2,7 +2,7 @@ const { Router } = require("express");
 const router = Router();
 
 // dtos
-const productSchema = require("../dto/product.dto");
+const productDto = require("../dto/product.dto");
 // middleware
 const validationSchema = require("../../utils/middleware/validate-schema");
 // services
@@ -11,12 +11,7 @@ const productsServices = new ProductsServices();
 
 router.get("/", productsServices.getProducts);
 router.get("/:id", productsServices.getProduct);
-router.post(
-  "/",
-  productSchema,
-  validationSchema,
-  productsServices.createProduct
-);
+router.post("/", productDto, validationSchema, productsServices.createProduct);
 router.put("/:id", productsServices.updateProduct);
 router.delete("/:id", productsServices.deleteProduct);
 

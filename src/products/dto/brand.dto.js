@@ -1,9 +1,9 @@
 const { body } = require("express-validator");
 
-const brandSchema = [
+const brandDto = [
   body("brand")
     .exists({ checkFalsy: false })
     .withMessage("Brand name is required"),
 ];
 
-module.exports = brandSchema;
+module.exports = brandDto;
