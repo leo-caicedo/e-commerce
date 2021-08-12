@@ -13,6 +13,14 @@ const productSchema = new Schema(
         if (price < 0) throw new Error("The price must be a positive decimal");
       },
     },
+    brand: {
+      type: Schema.Types.ObjectId,
+      ref: "Brand",
+    },
+    category: {
+      type: Schema.Types.ObjectId,
+      ref: "Category",
+    },
     description: String,
     available: {
       type: Boolean,
