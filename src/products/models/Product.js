@@ -16,10 +16,12 @@ const productSchema = new Schema(
     brand: {
       type: Schema.Types.ObjectId,
       ref: "Brand",
+      required: true,
     },
     category: {
       type: Schema.Types.ObjectId,
       ref: "Category",
+      required: true,
     },
     description: String,
     available: {
