@@ -4,7 +4,10 @@ const Brand = require("../models/Brand");
 class BrandsServices {
   async getBrands(req, res, next) {
     try {
-      const brands = await Brand.find({});
+      const brands = await Brand.find({}).populate("products", {
+        product: 1,
+        _id: 0,
+      });
       res.json(brands);
     } catch (err) {
       next(err);
@@ -15,7 +18,11 @@ class BrandsServices {
     const { id } = req.params;
 
     try {
-      const brand = await Brand.findById(id);
+      const brand = await Brand.findById(id).populate("products", {
+        product: 1,
+        price: 1,
+        description: 1,
+      });
       res.json(brand);
     } catch (err) {
       next(err);

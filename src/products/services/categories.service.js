@@ -4,7 +4,10 @@ const Category = require("../models/Category");
 class CategoryServices {
   async getCategories(req, res, next) {
     try {
-      const categories = await Category.find({});
+      const categories = await Category.find({}).populate("products", {
+        product: 1,
+        _id: 0,
+      });
       res.json(categories);
     } catch (err) {
       next(err);
@@ -15,7 +18,11 @@ class CategoryServices {
     const { id } = req.params;
 
     try {
-      const category = await Category.findById(id);
+      const category = await Category.findById(id).populate("products", {
+        product: 1,
+        price: 1,
+        description: 1,
+      });
       res.json(category);
     } catch (err) {
       next(err);
