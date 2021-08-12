@@ -1,4 +1,3 @@
-const { body } = require("express-validator");
 const { Router } = require("express");
 const router = Router();
 
