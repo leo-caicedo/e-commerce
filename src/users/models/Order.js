@@ -2,10 +2,6 @@ const { Schema, model } = require("mongoose");
 
 const orderSchema = new Schema(
   {
-    date: {
-      type: Date,
-      required: true,
-    },
     user: {
       type: Schema.Types.ObjectId,
       ref: "User",
@@ -20,6 +16,7 @@ const orderSchema = new Schema(
     ],
   },
   {
+    timestamp: true,
     versionKey: false,
   }
 );
