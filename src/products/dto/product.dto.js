@@ -3,7 +3,7 @@ const { body } = require("express-validator");
 const productDto = [
   // name
   body("product")
-    .exists({ checkFalsy: true })
+    .exists({ checkFalsy: false })
     .withMessage("Product name is required")
     .isLength({ max: 30 })
     .withMessage("The name must have a maximum of 30 characters"),
