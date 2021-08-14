@@ -5,7 +5,7 @@ const { config } = require("../../config");
 const User = require("../../users/models/User");
 
 const verifyToken = async (req, res, next) => {
-  const token = req.haaders["access-token"];
+  const token = req.headers["access-token"];
   if (!token) {
     return res.status(403).json({ message: "no token provided" });
   }
