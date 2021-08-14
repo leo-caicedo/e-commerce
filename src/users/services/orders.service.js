@@ -4,7 +4,13 @@ const Order = require("../models/Order");
 class OrdersServices {
   async getOrders(req, res, next) {
     try {
-      const orders = await Order.find({});
+      const orders = await Order.find({})
+        .populate("user", {
+          _id: 0,
+          username: 1,
+        })
+        .populate("products", { _id: 0, product: 1 })
+        .exec();
       res.json(orders);
     } catch (err) {
       next(err);
