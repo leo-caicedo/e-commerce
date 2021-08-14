@@ -6,7 +6,7 @@ const { signUpDto, signInDto } = require("../dto/user.dto");
 // middleware
 const validationSchema = require("../../utils/middleware/validate-schema");
 // services
-const UsersServices = require("../services/user.service");
+const UsersServices = require("../services/users.service");
 const usersServices = new UsersServices();
 
 router.get("/", usersServices.getUsers);
