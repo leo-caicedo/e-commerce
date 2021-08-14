@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 // models
 const User = require("../models/User");
 
-class UserServices {
+class UsersServices {
   async getUsers(req, res, next) {
     try {
       const users = await User.find({});
@@ -71,13 +71,12 @@ class UserServices {
     const { username, password } = req.body;
 
     const user = await User.findOne({ username });
-    const correctPassword =
-      user === null ? false : await bcrypt.compare(password, user.password);
-
-    if (!correctPassword) {
-      res.status(401).json({
-        message: "invalid credentials",
-      });
+    if (!user) {
+      return res.status(400).json({ message: "Invalid Credential" });
+    }
+    const matchPassword = await User.validatePassword(password, user.password);
+    if (!matchPassword) {
+      return res.status(400).json({ message: "Invalid Credential" });
     }
 
     res.json({
@@ -87,4 +86,4 @@ class UserServices {
   }
 }
 
-module.exports = UserServices;
+module.exports = UsersServices;

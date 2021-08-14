@@ -3,7 +3,7 @@ const { body } = require("express-validator");
 // models
 const User = require("../models/User");
 
-const userDto = [
+const signUpDto = [
   // username
   body("username")
     .exists({ checkFalsy: false })
@@ -23,4 +23,14 @@ const userDto = [
     .withMessage("Password is required"),
 ];
 
-module.exports = userDto;
+const signInDto = [
+  // username
+  body("username")
+    .exists({ checkFalsy: false })
+    .withMessage("Username is required"),
+  body("password")
+    .exists({ checkFalsy: false })
+    .withMessage("Password is required"),
+];
+
+module.exports = { signUpDto, signInDto };

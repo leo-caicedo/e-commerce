@@ -6,7 +6,6 @@ const userSchema = new Schema(
     username: {
       type: String,
       required: true,
-      unique: true,
     },
     password: {
       type: String,
@@ -30,6 +29,9 @@ const userSchema = new Schema(
 userSchema.statics.encryptPassword = async (password) => {
   const salt = await bcrypt.genSalt(6);
   return await bcrypt.hash(password, salt);
+};
+userSchema.statics.validatePassword = async (receivedPassword, password) => {
+  return await bcrypt.compare(receivedPassword, password);
 };
 
 // delete password for response
