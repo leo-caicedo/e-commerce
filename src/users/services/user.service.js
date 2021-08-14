@@ -7,7 +7,7 @@ class UsersServices {
   async getUsers(req, res, next) {
     try {
       const users = await User.find({});
-      res.json(user);
+      res.json(users);
     } catch (err) {
       next(err);
     }
@@ -18,7 +18,7 @@ class UsersServices {
 
     try {
       const user = await User.findById(id);
-      res.json(use);
+      res.json(user);
     } catch (err) {
       next(err);
     }
