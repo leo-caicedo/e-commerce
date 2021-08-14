@@ -5,14 +5,19 @@ const router = Router();
 const orderDto = require("../dto/order.dto");
 // middleware
 const validationSchema = require("../../utils/middleware/validate-schema");
+const verifyToken = require("../../utils/middleware/jwt");
 // services
 const OrdersServices = require("../services/orders.service");
 const ordersServices = new OrdersServices();
 
 router.get("/", ordersServices.getOrders);
 router.get("/:id", ordersServices.getOrder);
-router.post("/", orderDto, validationSchema, ordersServices.createOrder);
-router.put("/:id", ordersServices.updateOrder);
-router.delete("/:id", ordersServices.deleteOrder);
+router.post(
+  "/",
+  [verifyToken, orderDto, validationSchema],
+  ordersServices.createOrder
+);
+router.put("/:id", verifyToken, ordersServices.updateOrder);
+router.delete("/:id", verifyToken, ordersServices.deleteOrder);
 
 module.exports = router;

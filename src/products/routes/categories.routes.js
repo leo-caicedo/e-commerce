@@ -5,6 +5,7 @@ const router = Router();
 const categoryDto = require("../dto/category.dto");
 // middleware
 const validationSchema = require("../../utils/middleware/validate-schema");
+const verifyToken = require("../../utils/middleware/jwt");
 // services
 const CategoryServices = require("../services/categories.service");
 const categoriesServices = new CategoryServices();
@@ -13,11 +14,10 @@ router.get("/", categoriesServices.getCategories);
 router.get("/:id", categoriesServices.getCategory);
 router.post(
   "/",
-  categoryDto,
-  validationSchema,
+  [verifyToken, categoryDto, validationSchema],
   categoriesServices.createCategory
 );
-router.put("/:id", categoriesServices.updateCategory);
-router.delete("/:id", categoriesServices.deleteCategory);
+router.put("/:id", verifyToken, categoriesServices.updateCategory);
+router.delete("/:id", verifyToken, categoriesServices.deleteCategory);
 
 module.exports = router;
