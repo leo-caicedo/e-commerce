@@ -1,3 +1,6 @@
+const jwt = require("jsonwebtoken");
+
+const { config } = require("../../config");
 // models
 const User = require("../models/User");
 
@@ -77,8 +80,14 @@ class UsersServices {
       return res.status(400).json({ message: "Invalid Credential" });
     }
 
+    // token
+    const token = jwt.sign({ id: user._id }, config.secret, {
+      expiresIn: 8600, // 24 hours
+    });
+
     res.json({
       message: `Welcomme ${user.username}`,
+      token,
       profile: user,
     });
   }
