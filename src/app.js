@@ -1,4 +1,5 @@
 const express = require("express");
+const morgan = require("morgan");
 
 // required routes
 const categoriesRoutes = require("./products/routes/categories.routes");
@@ -20,6 +21,7 @@ const createApp = () => {
 
   // middleware
   app.use(express.json());
+  app.use(morgan("dev"));
 
   // routes
   app.use("/api/categories", categoriesRoutes);
