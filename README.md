@@ -1,4 +1,5 @@
-# e-commerce API built with nodejs and express
+# e-commerce 
+## _API built with nodejs and express_
 ## Use of products
 For product use, the API provides category, brand and product endpoints. Which are related for a greater context on the product that is created.
 Example:
